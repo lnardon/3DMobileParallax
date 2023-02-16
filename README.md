@@ -13,4 +13,4 @@ A website with a 3D parallax effect for the mobile version.
 - HTML
 - Javascript
 - CSS
-- Three.js (https://github.com/lnardon/Mapalizer)
+- Three.js (https://github.com/mrdoob/three.js)
