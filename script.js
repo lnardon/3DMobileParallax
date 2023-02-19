@@ -75,6 +75,30 @@ loader.load(
   }
 );
 
+// window.addEventListener(
+//   "ondevicemotion ",
+//   (e) => {
+//     console.log(e);
+//     camera.rotation._x = e.rotationRate.alpha;
+//     document.getElementById("debug").innerText = e.acceleration.x;
+//   },
+//   true
+// );
+
+function handleParallax(x, y) {
+  y > 0.5
+    ? (scene.children[2].children[0].position.y = y)
+    : (scene.children[2].children[0].position.y = -y);
+  x > 0.5
+    ? (scene.children[2].children[0].position.x = x)
+    : (scene.children[2].children[0].position.x = -x);
+}
+
+window.addEventListener("devicemotion", (e) => {
+  console.log(e);
+  handleParallax(e.acceleration.x, e.acceleration.y);
+});
+
 //RENDER LOOP
 requestAnimationFrame(render);
 function render() {
