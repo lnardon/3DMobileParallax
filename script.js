@@ -46,7 +46,7 @@ scene.add(spotLight2);
 // Load gltf scene
 const loader = new GLTFLoader();
 loader.load(
-  "./shapes.glb",
+  "./bg.glb",
   function (gltf) {
     scene.add(gltf.scene);
   },
