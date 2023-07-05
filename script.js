@@ -72,9 +72,9 @@ function lerp (start, end, amt){
 function handleParallax(x, y, z) {
   const sensitivity = 0.1;
   scene.children[2].children.forEach(child => {
-    child.position.x = lerp(child.position.x, child.position.x + (x * sensitivity), 0.01);
-    child.position.y = lerp(child.position.y, child.position.y + (y * sensitivity), 0.01);
-    child.position.z = lerp(child.position.z, child.position.z + (z * sensitivity), 0.01);
+    child.position.x = Math.sin(lerp(child.position.x, child.position.x + (x * sensitivity), 0.01));
+    child.position.y = Math.sin(lerp(child.position.y, child.position.y + (y * sensitivity), 0.01));
+    child.position.z = Math.sin(lerp(child.position.z, child.position.z + (z * sensitivity), 0.01));
   });
 }
 
