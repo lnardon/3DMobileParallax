@@ -65,37 +65,25 @@ function render() {
   requestAnimationFrame(render);
 }
 
-
-
 function lerp (start, end, amt){
-  return (1-amt)*start+amt*end
+  return start + amt * (end - start)
 }
 
 function handleParallax(x, y, z) {
-  if(Math.abs(x) > 2){
-    scene.children[2].children.forEach(child => {
-      child.position.x = lerp(child.position.x,child.position.x + (x/14), 0.01)
-    });
-  }
-  if(Math.abs(y) > 2){
-    scene.children[2].children.forEach(child => {
-      child.position.y = lerp(child.position.y,child.position.y + (y/14), 0.01)
-    });
-  }
-  if(Math.abs(z) > 2){
-    scene.children[2].children.forEach(child => {
-      child.position.z = lerp(child.position.z,child.position.z + (z/14), 0.01)
-    });
-  }
+  const sensitivity = 0.1;
+  scene.children[2].children.forEach(child => {
+    child.position.x = lerp(child.position.x, child.position.x + (x * sensitivity), 0.01);
+    child.position.y = lerp(child.position.y, child.position.y + (y * sensitivity), 0.01);
+    child.position.z = lerp(child.position.z, child.position.z + (z * sensitivity), 0.01);
+  });
 }
 
-if(window.DeviceMotionEvent){
-  window.addEventListener("devicemotion", (e) => {
-    // document.getElementById("logs").innerText = `${e.rotationRate.alpha} - ${e.rotationRate.beta} - ${e.rotationRate.gamma}`
-    handleParallax(e.rotationRate.beta,e.rotationRate.gamma,e.rotationRate.alpha);
+if(window.DeviceOrientationEvent){
+  window.addEventListener("deviceorientation", (e) => {
+    handleParallax(e.beta,e.gamma,e.alpha);
   });
 } else {
-  alert("Your device does not support the Device Motion Event.")
+  alert("Your device does not support the Device Orientation Event.")
 }
 
 window.addEventListener(
